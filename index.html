@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="classApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Class Creator</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+  </head>
+  <body ng-controller="classCtrl as classes">
+    <header>
+      <h1>Class Creator</h1>
+    </header>
+    <hr>
+    <main>
+      <div class="row">
+
+        <div class="details col s4">
+          <div ng-repeat="class in $root.classes">
+            <p><b>Class Name:</b> {{class.name}}</p>
+            <p><b>Teacher Name:</b> {{class.teacher}}</p>
+            <p><b>Students:</b> {{class.students.length}}</p>
+            <ul ng-repeat="student in class.students" class="browser-default">
+              <li>{{student.name}} ({{student.grade}})</li>
+            </ul>
+            <hr>
+          </div>
+        </div>
+
+        <div class="forms col s4">
+
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Create a New Class</span>
+              <form name="classForm" class="classForm" novalidate>
+                <div>
+                  <label for="class_name">Class Name</label>
+                  <input id="class_name" name="class_name" type="text">
+                </div>
+                <div>
+                  <label for="teacher_name">Teacher Name</label>
+                  <input id="teacher_name" name="teacher_name" type="text">
+                </div>
+                <input class="btn waves-effect waves-light" type="submit">
+                </input>
+              </form>
+            </div>
+          </div>
+          <br>
+          <div class="card blue-grey darken-1">
+
+            <div class="card-content white-text">
+              <span class="card-title">Create a New Student</span>
+              <form name="studentForm" class="studentForm" novalidate>
+                <div>
+                  <label>Class</label>
+                  <select ng-model="studentClass" ng-options="class.name for class in $root.classes" class="browser-default black-text">
+                    <option value="">-- Select One --</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="class_name">Student Name</label>
+                  <input id="class_name" name="class_name" type="text">
+                </div>
+                <input class="btn waves-effect waves-light" type="submit">
+                </input>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="stats col s4">
+          <div>
+            <p><b>Total Number of Classes:</b> {{$root.classes.length}}</p>
+            <p><b>Teacher Number of Students: </b>0</p>
+            <hr>
+            <p><b>Stats for:</b></p>
+            <select ng-model="statClass" ng-options="item.name for item in $root.classes" class="browser-default black-text">
+            </select>
+            <p><b>Average Grade: </b>F</p>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="controllers/classes.js"></script>
+    <script src="controllers/students.js"></script>
+  </body>
+</html>
